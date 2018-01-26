@@ -16,13 +16,13 @@ class linkedList	//creates a linked list
   head=NULL;
   tail=NULL;
  }
- void insert(int data)
+ void insert(int data)	//inserts the entered data at the end of the list
  {
   node *temp=new node;
   temp->data=data;
   temp->prev=NULL;
   temp->next=NULL;
-  if(head==NULL)
+  if(head==NULL)	//if the list is empty
   {
    head=temp;
    tail=temp;
@@ -34,22 +34,21 @@ class linkedList	//creates a linked list
    tail=temp;
   }
  }
- void insertAt(int pos, int data)
+ void insertAt(int pos, int data)	//inserts the entered data in the desired position
  {
   node *temp=new node;
   temp->data=data;
   temp->prev=NULL;
   temp->next=NULL;
-  node *t1=new node;
+  node *t1=new node;	//helps to go through the nodes 
   t1=head;
-  int c=0;
+  int c=0;	//stores the number of elements
   while(t1!=NULL)
   {
    t1=t1->next;
    c++;
   }
-  if(pos>c
-  )
+  if(pos>c)	//checks that the position does not exceed the number of elements
   {
    cout<<"The linked list does not have that many elements\n";
   }
@@ -57,11 +56,11 @@ class linkedList	//creates a linked list
   {
    node *t=new node;
    t=head;
-   for(int i=1;i<pos-1;i++)
+   for(int i=1;i<pos-1;i++)	//goes upto the previous node
    {
     t=t->next;
    }
-   if(t==tail)
+   if(t==tail)	
    {
     t->next=temp;
     temp->prev=t;
@@ -76,7 +75,7 @@ class linkedList	//creates a linked list
    }
   }
  }
- void deleteN()
+ void deleteN()	//deletes the last node
  {
   node *temp=new node;
   temp=head;
@@ -88,11 +87,11 @@ class linkedList	//creates a linked list
   tail=temp->prev;
   delete temp;
  }
- void deleteAt(int pos)
+ void deleteAt(int pos)	//deletes the desired node
  {
   node *temp=new node;
   temp=head;
-  for(int i=1;i<pos;i++)
+  for(int i=1;i<pos;i++)	//goes upto the desired node
   {
    temp=temp->next;
   }
@@ -108,11 +107,11 @@ class linkedList	//creates a linked list
   }
   delete temp;
  }
- int countItems()
+ int countItems()	//counts the number of elements
  {
   node *temp=new node;
   temp=head;
-  int c=0;
+  int c=0;	//stores the number of elements
   while(temp!=NULL)
   {
    temp=temp->next;
@@ -120,7 +119,7 @@ class linkedList	//creates a linked list
   }
   return c;
  }
- void display()
+ void display()	//displays the list
  {
   node *temp=new node;
   temp=head;
@@ -137,7 +136,8 @@ class linkedList	//creates a linked list
 int main()
 {
  int n,pos,data;
- linkedList obj;
+ linkedList obj;	//creates an object of class linkedList
+ //function calling and displaying
  cout<<"Enter the no. of entries you want to make\n";
  cin>>n;
  for(int i=1;i<=n;i++)
