@@ -146,7 +146,9 @@ int main()
  obj.bsearch(obj.root,data);
  cout<<"Enter the data you want to delete\n";
  cin>>data;
+ cout<<"Lets find your data\n";
  obj.deleteN(data);
+ cout<<"After deleting it...\n";
  obj.display(obj.root);
  cout<<"\n"; 
  return 0;
