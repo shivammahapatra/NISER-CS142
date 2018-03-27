@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
-class node
+class node		//defines what a node is
 {
  public:
  int data;
  node *parent,*left,*right;
- node()
+ node()		//constructor to initialize the variables
  {
   data=0;
   parent=NULL;
@@ -13,33 +13,33 @@ class node
   right=NULL;
  }
 };
-class Tree
+class Tree		//creating a binary tree
 {
  public:
- node *root=NULL;
- void insert(node *v,int data)
+ node *root=NULL;		
+ void insert(node *v,int data)		//inserts elements in the tree
  {
   node *temp=new node;
   temp->data=data;
-  if(root==NULL)
+  if(root==NULL)		//checking if the tree is empty
   {
    root=temp;
   }
   else
   {
-   if(data < v->data)
+   if(data < v->data)		//if entry data is less than node's data, then it goes to its left child
    {
-    if(v->left != NULL)
+    if(v->left != NULL)		//if there is some data in that node, then it again compares its data with the entry data
     {
-     insert(v->left,data);
+     insert(v->left,data);		//recursion call
     }
-    else
+    else		//if there is no data in that node, then it inserts the entry data there
     {
      v->left=temp;
      temp->parent=v;
     }
    }
-   else
+   else			//if entry data is greater than node's data, then it goes to its right child 
    {
     if(v->right != NULL)
     {
@@ -62,6 +62,7 @@ class Tree
    p->parent->left=NULL;
    else
    p->parent->right=NULL;
+   delete p;
   }
   else if(p->left == NULL)
   {
@@ -69,6 +70,7 @@ class Tree
    p->parent->left=p->right;
    else
    p->parent->right=p->right;
+   delete p;
   }
   else if(p->right == NULL)
   {
@@ -76,23 +78,38 @@ class Tree
    p->parent->left=p->left;
    else
    p->parent->right=p->left;
+   delete p;
   }
   else
   {
    node *temp=p->left;
+   if(temp==NULL)
    while(temp->right != NULL)
    {
     temp=temp->right;
    }
    if(temp->left != NULL)
    {
-    temp->parent->right=temp->left;
     p->data=temp->data;
+    if(temp->parent->left == temp)
+    temp->parent->left=temp->left;
+    else
+    temp->parent->right=temp->left;
+    delete temp;
    }
    else
    {
-    temp->parent->right=NULL;
     p->data=temp->data;
+    if(temp->parent->left == temp)
+    {
+     temp->parent->left=NULL;
+     delete temp->parent->left;
+    }
+    else
+    {
+	 temp->parent->right=NULL;
+	 delete temp->parent->right;
+    }
    }
   }
  }
@@ -118,6 +135,16 @@ class Tree
    return p;
   }
  }
+ void rSearch(node *v,int l,int r)
+ {
+  if(v==NULL)
+  return;
+  rSearch(v->left,l,r);
+  if(v->data >= l && v->data <= r)
+  cout<<v->data<<" ";
+  rSearch(v->right,l,r);
+ }
+
  void display(node *v)
  {
   if(v==NULL)
@@ -130,7 +157,7 @@ class Tree
 int main()
 {
  Tree obj;
- int n,data;
+ int n,data,l,r;
  cout<<"Enter the number of entries you want to make\n";
  cin>>n;
  for(int i=1;i<=n;i++)
@@ -151,6 +178,12 @@ int main()
  cout<<"After deleting it...\n";
  obj.display(obj.root);
  cout<<"\n"; 
+ cout<<"Enter the lower limit\n";
+ cin>>l;
+ cout<<"Enter the upper limit\n";
+ cin>>r;
+ obj.rSearch(obj.root,l,r);
+ cout<<"\n";
  return 0;
 }
 
