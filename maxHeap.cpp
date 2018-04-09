@@ -89,6 +89,7 @@ int main()
 	obj.insert(data);
     }
     obj.display();
+    cout<<"Removing the root...\n";
     obj.remove();
     obj.display();
 }
