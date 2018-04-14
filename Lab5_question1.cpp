@@ -56,9 +56,12 @@ class BubbleSort		//implementing bubble sort
   {
    for(int j=i;j<size;j++)		//swapping
    {
-   	t=a[j];
-   	a[j]=a[i];
-   	a[i]=t;
+	if(a[i]>a[j])
+	{
+   	 	t=a[j];
+   		a[j]=a[i];
+   		a[i]=t;
+	}
    }
   }
   return a;		//returns array
@@ -88,6 +91,12 @@ int main()
 {
  //implements the sorting functions
  BubbleSort obj1;
+ int a[5]={5,3,6,1,2};
+ obj1.sortArray(a,5);
+ for(int i=0;i<5;i++)
+ {
+  	cout<<a[i]<<" ";
+ }
  linkedList obj2;
  obj2.addNode(5);
  obj2.addNode(3);
