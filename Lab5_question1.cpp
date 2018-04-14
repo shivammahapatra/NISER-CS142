@@ -97,6 +97,7 @@ int main()
  {
   	cout<<a[i]<<" ";
  }
+ cout<<"\n";
  linkedList obj2;
  obj2.addNode(5);
  obj2.addNode(3);
