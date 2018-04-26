@@ -55,100 +55,102 @@ class Tree		//creating a binary tree
     }
     void deleteN(int key)
     {
-        node *p=bsearch(root,key);
-        if(p->left == NULL && p->right == NULL)
+        node *p=bsearch(root,key);		//calls bsearch function to get the position of the key
+        if(p->left == NULL && p->right == NULL)		//checking for a leaf node
         {
-            if(p->parent->left == p)
-            p->parent->left=NULL;
+            if(p->parent->left == p)		//if it is the left child
+            p->parent->left=NULL;		//make the left pointer of the parent NULL
             else
-            p->parent->right=NULL;
-            delete p;
+            p->parent->right=NULL;		//make the right pointer of the parent NULL
+            delete p;		//deletes the node
         }
-        else if(p->left == NULL || p->right == NULL)
+        else if(p->left == NULL || p->right == NULL)		//if it has only one child
         {
-            if(p==root)
+            if(p==root)		//if it is root
             {
-   	            if(p->left!=NULL)
-   	            root=p->left;
+   	            if(p->left!=NULL)		//has only left child
+   	            root=p->left;		//make the left child the root
    	            else
-   	            root=p->right;
+   	            root=p->right;		//make the right child the root
             }
-            else
+            else		//not root
             {
-                if(p->left == NULL)
+                if(p->left == NULL)		//has only right child
                 {
-                    if(p->parent->left == p)
-                    p->parent->left=p->right;
+                    if(p->parent->left == p)		//is the left child of its parent
+                    p->parent->left=p->right;		//links the left pointer of the parent with the right child of the node
                     else
-                    p->parent->right=p->right;
-                    delete p;
+                    p->parent->right=p->right;		//links the right pointer of the parent with the right child of the node
+                    delete p;		//deletes the node
                 }
                 else 
                 {
-                    if(p->parent->left == p)
-                    p->parent->left=p->left;
+                    if(p->parent->left == p)		//is the left child of its parent
+                    p->parent->left=p->left;		//links the left pointer of the parent with the left child of the node
                     else
-                    p->parent->right=p->left;
-                    delete p;
+                    p->parent->right=p->left;		//links the right pointer of the parent with the left child of the node
+                    delete p;		//deletes the node
                 }
             }
         }
-        else
+        else		//if it has two children
         {
-            node *temp=p->left;
+	    //taking the largest smaller element	
+            node *temp=p->left;		
             if(temp==NULL)
             while(temp->right != NULL)
             {
                 temp=temp->right;
             }
-            if(temp->left != NULL)
+	    //now temp is at the largest smaller element	
+            if(temp->left != NULL)		//it has left child		
             {
-                p->data=temp->data;
-                if(temp->parent->left == temp)
-                temp->parent->left=temp->left;
+                p->data=temp->data;		//puts the temp's data in the node  
+                if(temp->parent->left == temp)		//if it is the left child
+                temp->parent->left=temp->left;		//links the left pointer of the parent with the left child of the node
                 else
-                temp->parent->right=temp->left;
+                temp->parent->right=temp->left;		//links the right pointer of the parent with the left child of the node
                 delete temp;
             }
             else
             {
-                p->data=temp->data;
-                if(temp->parent->left == temp)
+                p->data=temp->data;		//puts the temp's data in the node
+                if(temp->parent->left == temp)		//if it is the left child
                 {
-                    temp->parent->left=NULL;
-                    delete temp->parent->left;
+                    temp->parent->left=NULL;		//makes the left child of the parent NULL
+                    delete temp->parent->left;		//deletes the node
                 }
                 else
                 {
-	                temp->parent->right=NULL;
-	                delete temp->parent->right;
+	                temp->parent->right=NULL;		//makes the right child of the parent NULL
+	                delete temp->parent->right;		//deletes the node
                 }
             }
         }
     }
-    node *bsearch(node *v,int data)
+    node *bsearch(node *v,int data)		//returns the address of the key value
     {
         node *temp=v,*p;
-        if(v==NULL)
+        if(v==NULL)		//if not found
         {
             cout<<"Not Found\n";
             return NULL;
         }
         else
         {
-            if(data < temp->data)
-            p=bsearch(temp->left,data);
+            if(data < temp->data)		
+            p=bsearch(temp->left,data);		//searches to the left of the node
             else if(data > temp->data)
-            p=bsearch(temp->right,data);
+            p=bsearch(temp->right,data);		//searches to the right of the node
             else
             {
                 cout<<"Found\n";
-                return temp;
+                return temp;		//returns the address of the key value
             }
             return p;
         }
     }
-    void rSearch(node *v,int l,int r)
+    void rSearch(node *v,int l,int r)		//find all the values between a given range
     {
         if(v==NULL)
         return;
@@ -157,7 +159,7 @@ class Tree		//creating a binary tree
         cout<<v->data<<" ";
         rSearch(v->right,l,r);
     }
-    void display(node *v)
+    void display(node *v)		//displays the tree by in-order traversal method
     {
         if(v==NULL)
         return;
@@ -168,6 +170,7 @@ class Tree		//creating a binary tree
 };
 int main()
 {
+    //objects creation and functions calling
     Tree obj;
     int n,data,l,r;
     cout<<"Enter the number of entries you want to make\n";
