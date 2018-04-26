@@ -1,3 +1,4 @@
+/*The comments explaining the working of functions have already been mentioned in the Tree.cpp file. The comments for additional functions are written along with the new fnctions*/
 #include <iostream>
 using namespace std;
 class node		//defines what a node is
@@ -54,7 +55,7 @@ class Tree		//creating a binary tree
             }
         }
     }
-    void countN(node *v)
+    void countN(node *v)		//counts all the nodes in the binary search tree
     {
         if(v==NULL)
         return;
@@ -139,7 +140,7 @@ class Tree		//creating a binary tree
             }
         }
     }
-    node *bsearch(node *v,int data)
+    node *bsearch(node *v,int data)		//returns the address of the key value 
     {
         node *temp=v,*p;
         if(v==NULL)
@@ -161,7 +162,7 @@ class Tree		//creating a binary tree
             return p;
         }
     }
-    void rSearch(node *v,int l,int r)
+    void rSearch(node *v,int l,int r)		//a simple modification of display function. Traverses the entire tree but displays only those data which are within the range
     {
         if(v==NULL)
         return;
@@ -173,21 +174,21 @@ class Tree		//creating a binary tree
         }
         rSearch(v->right,l,r);
     }
-    void rSearch1(node *v,int l,int r)
+    void rSearch1(node *v,int l,int r)		//only traverses the data within the range and displays them
     {
         node *temp=v;
         if(v==NULL)
         return;
         else
         {
-            if(temp->data >= l && temp->data <= r)
+            if(temp->data >= l && temp->data <= r)		//if data is within the range
             {
- 	  	if(temp->data > l)  
-                rSearch1(temp->left,l,r);
+ 	  	if(temp->data > l)  		//greater than the lower limit
+                rSearch1(temp->left,l,r);		//checks for its left child
                 cout<<temp->data<<" ";
-                c++;
-                if(temp->data < r)
-                rSearch1(temp->right,l,r);
+                c++;		//stores the number of data within the range
+                if(temp->data < r)		//smaller than the upper limit 
+                rSearch1(temp->right,l,r);		//checks for its right child
             }
             else if(temp->data > l)
             rSearch1(temp->left,l,r);
@@ -195,7 +196,7 @@ class Tree		//creating a binary tree
             rSearch1(temp->right,l,r);
         }
     }
-    void display(node *v)
+    void display(node *v)		//displays the binary search tree 
     {
         if(v==NULL)
         return;
@@ -206,6 +207,7 @@ class Tree		//creating a binary tree
 };
 int main()
 {
+    //objects creation and functions calling
     Tree obj;
     int n,data,l,r;
     cout<<"Enter the number of entries you want to make\n";
